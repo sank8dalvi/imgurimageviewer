@@ -1,0 +1,56 @@
+#content{
+	display: none;
+}
+
+#imgurImage{
+	display: none;
+}
+
+.displayOnSuccess{
+	display: none;
+}
+
+#flag1{
+	display: none;
+}
+
+#flag2{
+	display: none;
+}
+
+#comments{
+	display: none;;
+}
+
+#my-signin2{
+	margin: auto;
+    width: 260px;
+    margin-top: 25px;
+}
+
+#warningAlert{
+	display: none;
+	width: 500px;
+}
+
+#imageTitle{
+	margin-top: 20px;
+}
+
+#commentSubmit{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 5px;
+}
+
+#commentText{
+	margin-top: 15px;
+	width: 300px;
+}
+
+.imageComments{
+	border-left: 5px solid blue;
+    background-color: #F1F1F1;
+    margin:7px;
+    font-size: 18px;
+}
