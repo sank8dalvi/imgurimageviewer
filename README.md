@@ -1,4 +1,6 @@
 You can test this Image Viewer by visiting
-http://imgurapi.sanket.tech/
+http://sank8dalvi.github.io/imgurimageviewer
 or
-http://imgur.sanket.tech/
+http://imgurapi.sanket.tech/
+
+
