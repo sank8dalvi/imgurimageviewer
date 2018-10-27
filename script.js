@@ -1,59 +1,8 @@
 
 $("#getImageFromId").click(function (){                 //Function executed on Get image click
-  var inputIdText = $("#imgurId").val();
-  var imageUrl;
-  if(!inputIdText==""){
-    imageUrl = "https://api.imgur.com/3/gallery/album/"+inputIdText;
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": imageUrl,
-      "error":function(result){
-        $("#flag1").html("noresponse1");
-      },
-      "method": "GET",
-      "headers": {
-        "Authorization": "Client-ID cd63f6451348822"
-      }       
-    }
-    $.ajax(settings).done(function (response1) {
-      $("#warningAlert").css("display","none");
-      $("#imgurImage").css("display","block");
-      $(".displayOnSuccess").css("display","block");
-      $("#imgurImage").attr("src",response1.data.images[0].link);
-      $("#imageTitle").html(response1.data.title);
-      showComments(imageUrl);
-    });
-
-    imageUrl = "https://api.imgur.com/3/gallery/image/"+inputIdText;
-    settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": imageUrl,
-      "error":function(result){
-        $("#flag2").html("noresponse2");
-      },
-      "method": "GET",
-      "headers": {
-        "Authorization": "Client-ID cd63f6451348822",
-      }
-    }
-
-    $.ajax(settings).done(function (response2) {
-      if(response2.success){
-       $("#warningAlert").css("display","none");
-       $("#imgurImage").css("display","block");
-       $(".displayOnSuccess").css("display","block");
-       $("#imgurImage").attr("src",response2.data.link);
-       $("#imageTitle").html(response2.data.title);
-       showComments(imageUrl);
-              }
-            });
-
-    if($("#flag2").html()=="noresponse2"&&$("#flag1").html()=="noresponse1"){
-      $("#warningAlert").css("display","block");
-      $("#warningAlert").html("Enter a valid Image ID");
-    }
+	if(!$("#imgurId").val()==""){
+		checkAlbum($("#imgurId").val());
+		chechImage($("#imgurId").val());
   }else{
     $("#warningAlert").css("display","block");
     $("#warningAlert").html("The input field can't be empty.");
@@ -117,6 +66,63 @@ function renderButton() {
     'onsuccess': onSuccess,
     'onfailure': onFailure
   });
+}
+function checkId(){
+	if($("#flag2").html()=="noresponse2"&&$("#flag1").html()=="noresponse1"){
+		$("#warningAlert").css("display","block");
+		$("#warningAlert").html("Enter a valid Image ID");
+	}
+}
+function checkAlbum(inputIdText){
+		var imageUrl = "https://api.imgur.com/3/gallery/album/"+inputIdText;
+		var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": imageUrl,
+			"error":function(result){
+				$("#flag1").html("noresponse1");
+				checkId();
+			},
+			"method": "GET",
+			"headers": {
+				"Authorization": "Client-ID cd63f6451348822"
+			}       
+		}
+		$.ajax(settings).done(function (response1) {
+			$("#warningAlert").css("display","none");
+			$("#imgurImage").css("display","block");
+			$(".displayOnSuccess").css("display","block");
+			$("#imgurImage").attr("src",response1.data.images[0].link);
+			$("#imageTitle").html(response1.data.title);
+			showComments(imageUrl);
+		});
+
+}
+function checkImage(inputIdText){
+	var imageUrl = "https://api.imgur.com/3/gallery/image/"+inputIdText;
+		settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": imageUrl,
+			"error":function(result){
+				$("#flag2").html("noresponse2");
+				checkId();
+			},
+			"method": "GET",
+			"headers": {
+				"Authorization": "Client-ID cd63f6451348822",
+			}
+		}
+		$.ajax(settings).done(function (response2) {
+			if(response2.success){
+				$("#warningAlert").css("display","none");
+				$("#imgurImage").css("display","block");
+				$(".displayOnSuccess").css("display","block");
+				$("#imgurImage").attr("src",response2.data.link);
+				$("#imageTitle").html(response2.data.title);
+				showComments(imageUrl);
+			}
+		});
 }
 function showComments(imgUrl){
   var settings = {
