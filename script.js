@@ -2,7 +2,7 @@
 $("#getImageFromId").click(function (){                 //Function executed on Get image click
 	if(!$("#imgurId").val()==""){
 		checkAlbum($("#imgurId").val());
-		chechImage($("#imgurId").val());
+		checkImage($("#imgurId").val());
   }else{
     $("#warningAlert").css("display","block");
     $("#warningAlert").html("The input field can't be empty.");
